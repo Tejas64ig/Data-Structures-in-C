@@ -1,42 +1,44 @@
+#include <stdio.h>
+#include <stdlib.h>
 
-public class Main {
+struct node {
+    int data;
+    struct node* next;
+};
 
+struct node* getnode(int val) {
+    struct node* p;
 
-    static class Node {
-        int data;
-        Node Next;
-        private Node next;
+    p = (struct node*)malloc(sizeof(struct node));
 
-        Node(int val) {
-            data = val;
-            Next = null;
-
-        }
-
-        static Node head = null;
-
-        static Node getNode(int val) {
-            return new Node(val);
-        }
-
-        static void display() {
-            if (head == null) {
-                return;
-            }
-
-            Node temp = head;
-            while (temp != null) {
-                System.out.print(temp.data + " ");
-                temp = temp.next;
-            }
-        }
-
-        public static void main(String[] args) {
-
-            head = getNode(10);
-            head.next = getNode(20);
-
-            display();
-        }
+    if (p == NULL) {
+        printf("Not enough memory\n");
+        return NULL;
     }
+
+    p->data = val;
+    p->next = NULL;
+
+    return p;
+}
+
+void display(struct node* p) {
+    if (p == NULL) {
+        return;
+    }
+
+    while (p != NULL) {
+        printf("%d ", p->data);
+        p = p->next;
+    }
+}
+
+int main() {
+    struct node* start = NULL;
+
+    start = getnode(10);
+    start->next = getnode(20);
+
+    display(start);
+    return 0;
 }
